@@ -19,7 +19,7 @@ public class Noeud {
     	System.out.print(n.m+" "+n.M+" "+n.T);
     	afficher(n.sad);
     }
-    
+     
     public Noeud rechercher(int k, Noeud n) {
     	if(n==null) return null;
     	else if(n.m==k)return n;
