@@ -1,18 +1,62 @@
+package Noeud;
+import java.util.ArrayList;
+
 public class Noeud {
     int m;
     int M;
     int T[];
-    Noeud sag;
-    Noeud sad;
+    Noeud sag = null;
+    Noeud sad = null;
     
-    Noeud(int pm, int pM, int pT[], Noeud gauche, Noeud droite){
+    public Noeud() {}
+    public Noeud(int pm, int pM, int pT[]){
         this.m=pm;
         this.M=pM;
         this.T=pT;
-        this.sag = gauche;
-        this.sad=droite;
     }
     
+    //Getter & Setter
+    public int getm() {
+		return this.m;
+	}
+
+	public void setm(int m) {
+		this.m = m;
+	}
+
+	public int getM() {
+		return this.M;
+	}
+
+	public void setM(int M) {
+		this.M = M;
+	}
+
+	public int[] getT() {
+		return T;
+	}
+
+	public void setT(int[] tas) {
+		this.T = tas;
+	}
+
+	public Noeud getSag() {
+		return sag;
+	}
+
+	public void setSag(Noeud sag) {
+		this.sag = sag;
+	}
+
+	public Noeud getSad() {
+		return sad;
+	}
+
+	public void setSad(Noeud sad) {
+		this.sad = sad;
+	}
+	
+	//Affiche un noeud
     public void afficher(Noeud n) {
     	if(n==null) return;
     	afficher(n.sag);
@@ -20,6 +64,7 @@ public class Noeud {
     	afficher(n.sad);
     }
      
+    //Recherche une valeur dans un noeud
     public Noeud rechercher(int k, Noeud n) {
     	if(n==null) return null;
     	else if(n.m==k)return n;
@@ -27,23 +72,24 @@ public class Noeud {
     	else return rechercher(k,n.sad);
     }
     
-    public void add(Noeud oldNoeud, Noeud newNoeud) {
-        if(newNoeud.m<oldNoeud.m) {
-            if(oldNoeud.sag==null) {
-                oldNoeud.sag = newNoeud;
+    public void add(Noeud n) {
+    	System.out.println("M "+n.getM()+" m "+n.getm());
+        if(n.getm()<this.m) {
+            if(this.sag==null) {
+                this.sag = n;
             }
             else {
-                add(oldNoeud.sag, newNoeud);
+                this.sag.add(n);
             }
         }
-        else if(newNoeud.m>oldNoeud.m) {
-            if(oldNoeud.sad==null) {
-                oldNoeud.sad = newNoeud;
+        else if(n.getm()>this.m) {
+            if(this.sad==null) {
+                this.sad = n;
             }else {
-                add(oldNoeud.sad, newNoeud);
+                this.sad.add(n);
             }
         }else {
-            System.out.println("Erreur valeur m introduit égale à la valeur du m du noeud actuel");
+            System.out.println("Erreur valeur m introduit egale a la valeur du m du noeud actuel");
         }
     }
     
